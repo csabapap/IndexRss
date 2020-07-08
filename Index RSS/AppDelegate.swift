@@ -16,11 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         // Override point for customization after application launch.
-        let feedManager = FeedManager()
-        let navigationController = UINavigationController(rootViewController: FeedTableViewController(feedManager: feedManager))
-        
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+//        let feedManager = FeedManager()
+//        let navigationController = UINavigationController(rootViewController: FeedTableViewController(feedManager: feedManager))
+//        
+//        window?.rootViewController = navigationController
+//        window?.makeKeyAndVisible()
         return true
     }
 

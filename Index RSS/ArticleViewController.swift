@@ -11,15 +11,20 @@ import WebKit
 
 class ArticleViewController: UIViewController {
     
-    @IBOutlet weak var webView: WKWebView!
+    let webView = WKWebView()
     
     var article: FeedItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.addSubview(webView)
+        
+        webView.frame = view.frame
+        
         // Do any additional setup after loading the view.
         print(article?.title ?? "nil")
+        print(article?.link ?? "link: nil")
         if let feedItem = article {
             let url = NSURL (string: feedItem.link);
             let request = NSURLRequest(url: url! as URL);

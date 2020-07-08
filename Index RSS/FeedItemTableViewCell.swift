@@ -10,11 +10,24 @@ import UIKit
 
 class FeedItemTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var itemTitle: UILabel!
-    @IBOutlet weak var itemDescription: UILabel!
-    @IBOutlet weak var itemImage: UIImageView!
+    let itemTitle = UILabel()
+//    @IBOutlet weak var itemDescription: UILabel!
+//    @IBOutlet weak var itemImage: UIImageView!
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        itemTitle.translatesAutoresizingMaskIntoConstraints = false
+        
+        contentView.addSubview(itemTitle)
+        
+        itemTitle.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        itemTitle.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

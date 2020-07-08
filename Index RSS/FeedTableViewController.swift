@@ -30,13 +30,12 @@ class FeedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = UIColor.red
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.register(FeedItemTableViewCell.self, forCellReuseIdentifier: "feed_item_cell")
         loadRssFeed()
     }
 
@@ -55,17 +54,25 @@ class FeedTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let feedItem = feed[indexPath.row]
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "FeedItemCell")
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedItemCell", for: indexPath) as? FeedItemTableViewCell else {
+//        guard let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "feed_item_cell") as? FeedItemTableViewCell else {
 //            fatalError("The dequeued cell is not an instance of FeedItemCell.")
 //        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "feed_item_cell", for: indexPath) as? FeedItemTableViewCell else {
+            fatalError("The dequeued cell is not an instance of FeedItemCell.")
+        }
 
-        cell.textLabel?.text = feedItem.title
+        cell.itemTitle.text = feedItem.title
 //        cell.itemDescription?.text = feedItem.description
-//        cell.itemImage.kf.setImage(with: URL(string: feedItem.img))
+//        cell.itemImage?.kf.setImage(with: URL(string: feedItem.img))
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = feed[indexPath.row]
+        let controller = ArticleViewController()
+        controller.article = article
+        navigationController?.pushViewController(controller, animated: true)
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
